@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fußball · CHECK24 Konzeptprototyp</title>
+  <meta name="description" content="Konzeptprototyp: „Die Trainerbank – Deine Entscheidung. Dein Spiel.“ Ein fiktives Gamification-Feature für eine Fußball-App.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Alles außer dem Bottom Sheet liegt in #app und wird bei geöffnetem Sheet auf "inert" gesetzt. -->
+  <div id="app">
+    <header class="app-bar">
+      <div class="app-bar-inner">
+        <button type="button" class="icon-btn on-dark" id="back-btn" data-go="entry" aria-label="Zurück zu Fußball" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h1 class="bar-title" id="bar-title">Fußball</h1>
+        <span class="badge">Konzeptprototyp</span>
+      </div>
+      <nav class="crumbs" aria-label="Navigationspfad">
+        <ol id="crumbs"></ol>
+      </nav>
+    </header>
+
+    <main id="main">
+
+      <!-- ZUSTAND 1: EINSTIEG -->
+      <section id="view-entry" class="entry" aria-label="Fußballbereich">
+        <article class="tb-card card" aria-labelledby="entry-title">
+          <div class="tb-visual">
+            <div id="entry-pitch"></div>
+            <span class="tb-badge">NEU · Konzeptidee</span>
+          </div>
+          <div class="tb-body">
+            <h2 id="entry-title" tabindex="-1">Die Trainerbank</h2>
+            <p class="tb-tagline">Deine Entscheidung. Dein Spiel.</p>
+            <p class="tb-teaser">„87. Minute. 1:1. Du sitzt auf der Trainerbank. Was tust du?“</p>
+            <ul class="pills" aria-label="Eckdaten">
+              <li>Kurze Spielsituationen</li>
+              <li>Keine Punkte, Ränge oder Streaks</li>
+              <li>ca. 1 Minute</li>
+            </ul>
+            <button type="button" class="btn primary large" id="start-btn">Szenario starten</button>
+          </div>
+        </article>
+
+        <section class="placeholder card" aria-label="Weitere Fußball-Inhalte (Platzhalter)">
+          <p class="placeholder-label">Weitere Bereiche der Fußball-App (im Prototyp nicht enthalten)</p>
+          <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+        </section>
+      </section>
+
+      <!-- ZUSTÄNDE 2–4: ENTSCHEIDUNGEN UND ABSCHLUSS -->
+      <section id="view-game" class="game" aria-label="Trainerbank" hidden>
+        <div class="stage card">
+          <div class="scoreboard" role="group" aria-label="Simulierter Spielstand">
+            <span class="sb-team home" id="sb-home"></span>
+            <span class="sb-mid">
+              <span class="sb-score" id="sb-score">1 : 1</span>
+              <span class="sb-clock" id="sb-clock">87.</span>
+            </span>
+            <span class="sb-team away" id="sb-away"></span>
+          </div>
+          <div class="pitch-wrap"><div id="pitch-host"></div></div>
+          <p class="pitch-caption" id="pitch-caption" aria-live="polite"></p>
+          <ul class="legend" aria-label="Legende">
+            <li><span class="lg lg-own" aria-hidden="true"></span>Dein Team (spielt nach rechts)</li>
+            <li><span class="lg lg-opp" aria-hidden="true"></span>Gegner</li>
+            <li><span class="lg lg-ball" aria-hidden="true"></span>Ball</li>
+            <li><span class="lg lg-sub" aria-hidden="true"></span>Neu eingewechselt</li>
+          </ul>
+          <div class="stage-actions">
+            <button type="button" class="btn ghost small" id="replay-btn" hidden>Spielzug erneut ansehen</button>
+          </div>
+        </div>
+
+        <div class="panel card" id="panel"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Konzeptprototyp – kein offizielles CHECK24-Angebot. Mannschaften, Spielsituation und alle Verläufe sind fiktiv und vordefiniert. Dies ist keine Live-Simulation und keine Vorhersage.</p>
+    </footer>
+  </div>
+
+  <!-- Wiederverwendbare Komponente: Chancen-&-Risiken-Bottom-Sheet -->
+  <div class="sheet-root" id="sheet" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-grab" aria-hidden="true"></div>
+      <header class="sheet-head">
+        <div>
+          <p class="eyebrow" id="sheet-eyebrow"></p>
+          <h2 id="sheet-title" tabindex="-1"></h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="Schließen">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+      <div class="sheet-body" id="sheet-body"></div>
+      <footer class="sheet-foot">
+        <p class="sheet-note" id="sheet-note"></p>
+        <button type="button" class="btn secondary block" data-close>Zurück zur Entscheidung</button>
+      </footer>
+    </section>
+  </div>
+
+  <script src="scenarios.js"></script>
+  <script src="pitch.js"></script>
+  <script src="insight-sheet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
